@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lazy Reels</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="ui-container">
+        <h1>Lazy Reels</h1>
+        <p class="subtitle">Connect your devices to start scrolling</p>
+        <button id="connect-btn">Connect</button>
+        <p id="status-text">Waiting for connection...</p>
+    </div>
+
+    <!-- Black screen overlay for phone -->
+    <div id="touchpad-overlay">
+        <!-- Optional faint text that fades out -->
+        <p class="fade-text">Swipe Up or Down</p>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
