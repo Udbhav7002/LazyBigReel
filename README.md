@@ -1,88 +1,67 @@
-<div align="center">
+# LazyBigReel
 
-# 📱 LazyBigReel
+Use your phone as a trackpad for scrolling Reels and Shorts on your Mac. The
+phone connects to a small server on your Mac over the local network, and
+swipes on the phone are simulated as arrow-key presses, so you can scroll
+from across the room.
 
-**Turn your phone into a sleek, zero-latency trackpad to endlessly scroll Reels & Shorts on your Mac.**
+## How it works
 
-[![Made with Node.js](https://img.shields.io/badge/Node.js-100000?style=for-the-badge&logo=node.js&logoColor=white)](#)
-[![Built with Expo](https://img.shields.io/badge/Expo-1C1E24?style=for-the-badge&logo=expo&logoColor=white)](#)
-[![Apple Inspired](https://img.shields.io/badge/UI-Apple_Inspired-000000?style=for-the-badge&logo=apple&logoColor=white)](#)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](./LICENSE)
+- The Mac runs a Node server (Express + Socket.IO). It receives swipe events
+  and simulates key presses with nut-js: swipe up presses Down (next reel),
+  swipe down presses Up (previous reel).
+- The phone runs an Expo (React Native) app. Swipe up gives a light
+  double-tap haptic, swipe down a heavy one, so you can tell the direction
+  without looking.
+- Once connected, the phone screen goes black so it doesn't light up the
+  room, and the app keeps the phone awake.
+- `Start_LazyBigReel.command` starts the Mac server in the background and
+  launches the Expo dev server with a QR code, so after installing you
+  never have to open a terminal again.
 
-</div>
+## Setup
 
----
+Prerequisites: [Node.js](https://nodejs.org/) on your Mac, and the Expo Go
+app on your iPhone or Android phone.
 
-### 🥱 Too lazy to sit up and scroll? We've got you covered.
-**LazyBigReel** bridges your Mac and your smartphone over your local Wi-Fi network, allowing you to lay back and swipe on your phone while the reels scroll seamlessly on your big screen.
+1. Clone the repo:
 
-No lag. No clunky interfaces. Just pure, uninterrupted doom-scrolling. 
+   ```bash
+   git clone https://github.com/Udbhav7002/LazyBigReel.git
+   cd LazyBigReel
+   ```
 
----
+2. Install dependencies for both apps:
 
-## ✨ Features
+   ```bash
+   # Mac server
+   cd mac-app && npm install
 
-- ⚡️ **Zero-Latency WebSockets:** Powered by `Socket.io`, your swipes are registered on your Mac in milliseconds.
-- 📳 **Native Haptics:** Feel the scroll! 
-  - 👆 *Swipe Up (Next Reel):* Crisp, light double-tap haptics.
-  - 👇 *Swipe Down (Prev Reel):* Heavy, satisfying thud haptic.
-- 🌙 **Pitch Black Mode:** Once connected, the phone UI goes completely pitch-black. It saves your battery and keeps the room dark while you watch the big screen.
-- 🚀 **1-Click Startup:** A custom double-clickable `.command` script launches the invisible background server and your Expo QR code instantly.
+   # Phone app
+   cd ../phone-app && npm install
+   ```
 
----
+## Usage
 
-## 🛠 Setup & Installation
+1. Double-click `Start_LazyBigReel.command` in Finder. A terminal opens
+   with a QR code.
+2. Open Expo Go on your phone and scan the QR code.
+3. In the app, type your Mac's IP address (printed in the terminal, e.g.
+   `192.168.1.5`) and tap Connect.
+4. Swipe: up for the next reel, down for the previous one.
 
-### Prerequisites
-1. **[Node.js](https://nodejs.org/en/)** installed on your Mac.
-2. The **Expo Go** app installed on your iPhone or Android.
+The Mac server also prints a localtunnel HTTPS URL, which you can use when
+the phone is not on the same network.
 
-### 1. Clone the Repo
-```bash
-git clone https://github.com/Udbhav7002/LazyBigReel.git
-cd LazyBigReel
-```
+## Notes
 
-### 2. Install Dependencies
-You need to install the packages for both the Mac server and the Phone app:
-```bash
-# Install Mac Server dependencies
-cd mac-app && npm install
+- Accessibility permissions: the Mac has to allow your terminal to simulate
+  keyboard presses. If swiping doesn't scroll the Mac, go to System
+  Settings > Privacy & Security > Accessibility and enable your terminal
+  app (or IDE).
+- Why Expo Go: in a normal mobile browser, iOS blocks the vibration API, so
+  the haptics would not work. The remote is a native app instead.
 
-# Install Phone App dependencies
-cd ../phone-app && npm install
-```
+## License
 
----
-
-## 🎮 How to Use (The Lazy Way)
-
-We built this for maximum laziness. Once installed, you never have to touch a terminal again.
-
-1. Open the `LazyBigReel` folder in your Mac's Finder.
-2. Double-click the **`Start_LazyBigReel.command`** file.
-3. A terminal will open with a massive **QR code**.
-4. Open **Expo Go** on your phone and scan the QR code.
-5. In the app, type your Mac's IP address (shown in your terminal, e.g., `192.168.1.5`) and smash **Connect**.
-6. **Lay back and start swiping.**
-
----
-
-## ⚠️ Important Notes
-
-- **Accessibility Permissions:** Your Mac must allow your Terminal application to simulate keyboard presses! If swiping on your phone doesn't scroll your Mac, go to **System Settings > Privacy & Security > Accessibility** and ensure your Terminal app (or IDE) is toggled ON.
-- **Why Expo Go?** If you try to run the phone interface in a standard mobile web browser (like Safari), Apple blocks the vibration API. We use React Native & Expo Go to guarantee you get those sweet, sweet haptics.
-
----
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](./LICENSE).
-
----
-
-<div align="center">
-  <i>Built for the ultimate couch potatoes. 🥔</i>
-</div>
+MIT — see [LICENSE](LICENSE).
