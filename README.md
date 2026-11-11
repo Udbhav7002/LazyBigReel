@@ -7,7 +7,7 @@
 [![Made with Node.js](https://img.shields.io/badge/Node.js-100000?style=for-the-badge&logo=node.js&logoColor=white)](#)
 [![Built with Expo](https://img.shields.io/badge/Expo-1C1E24?style=for-the-badge&logo=expo&logoColor=white)](#)
 [![Apple Inspired](https://img.shields.io/badge/UI-Apple_Inspired-000000?style=for-the-badge&logo=apple&logoColor=white)](#)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](./LICENSE)
 
 </div>
 
@@ -72,6 +72,14 @@ We built this for maximum laziness. Once installed, you never have to touch a te
 
 - **Accessibility Permissions:** Your Mac must allow your Terminal application to simulate keyboard presses! If swiping on your phone doesn't scroll your Mac, go to **System Settings > Privacy & Security > Accessibility** and ensure your Terminal app (or IDE) is toggled ON.
 - **Why Expo Go?** If you try to run the phone interface in a standard mobile web browser (like Safari), Apple blocks the vibration API. We use React Native & Expo Go to guarantee you get those sweet, sweet haptics.
+
+---
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE).
 
 ---
 
