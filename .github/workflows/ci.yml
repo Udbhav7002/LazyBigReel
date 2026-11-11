@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  server:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mac-app/package-lock.json
+
+      - name: Install mac-app dependencies
+        run: npm ci
+        working-directory: mac-app
+
+      - name: Syntax check
+        run: node --check server.js
+        working-directory: mac-app
+
+      - name: Boot smoke test
+        run: |
+          PORT=3457 node server.js &
+          SERVER_PID=$!
+          ok=0
+          for i in $(seq 1 30); do
+            if curl -sf -o /dev/null http://127.0.0.1:3457/; then
+              ok=1
+              break
+            fi
+            sleep 1
+          done
+          kill $SERVER_PID 2>/dev/null
+          if [ "$ok" -ne 1 ]; then
+            echo "Server failed to start listening"
+            exit 1
+          fi
+          echo "Server booted and served HTTP 200"
+        working-directory: mac-app

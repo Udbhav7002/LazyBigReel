@@ -1,5 +1,7 @@
 # LazyBigReel
 
+[![CI](https://github.com/Udbhav7002/LazyBigReel/actions/workflows/ci.yml/badge.svg)](https://github.com/Udbhav7002/LazyBigReel/actions/workflows/ci.yml)
+
 Use your phone as a trackpad for scrolling Reels and Shorts on your Mac. The
 phone connects to a small server on your Mac over the local network, and
 swipes on the phone are simulated as arrow-key presses, so you can scroll
